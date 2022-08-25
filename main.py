@@ -43,7 +43,7 @@ print("Quel est ton nom?")
 nom_usager2 = input()
 
 """
-La conversion de type. Python est un language dynamique et le type
+La conversion de type. Python est un language dynamique et le type d'une variable
 peut changer à chaque assignation.
 numero_dossier = 111 <- le type est int
 Si l'on fait l'assignation suivante:
@@ -107,7 +107,6 @@ else:
     print("Travaillez plus!")
 
 # Un if avec un elif et un else...
-# Ici, on teste deux conditions à l'aide de l'opérateur logique And.
 if nom_client == "Luc":
     print("Allo cher professeur!")
 elif nom_client == "Antoine":
@@ -141,7 +140,9 @@ else:
 """
 Les boucles while.
 Elles permettent d'exécuter un bloc d'instruction tant et aussi longtemps que la
-condition est True. On peut utiliser deux mots clés dans une boucle: break et continue.
+condition est True. L'utilisation d'une boucle while est préférable lorsque l'on ne
+connaît pas le nombre de boucle que l'on veut faire. 
+On peut utiliser deux mots clés dans une boucle: break et continue.
 'break' permet de sortir immédiatement de la boucle et continuer l'exécution
 du code qui se trouve juste en bas de la boucle.
 'continue' permet de sauter le reste des instructions de la boucle et
@@ -159,8 +160,13 @@ while compteur < 100:  # compteur <= 100 c'est la condition évaluée
     if compteur == 99:
         break
 
+guessing = True
 while play_game:
-    pass
+    while guessing:
+        # Logique du jeu
+        # if user_number == secret_number
+            #guessing = False
+        pass
 
 """
 Les boucles for! Cette boucle est à favoriser si vous savez d'avance
@@ -228,7 +234,6 @@ if is_player_alive(player_hp):
     print("Alive")
 else:
     print("Dead")
-
 
 def player_potion_use(potion_heal_amount):
     """
