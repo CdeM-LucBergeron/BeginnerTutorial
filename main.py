@@ -10,9 +10,15 @@ import random
 Le mot clé "import" sert à importer des fonctionnalités qui se trouvent dans un module.
 Dans l'exemple ci-haut, le module "random" contient une panoplie de fonctions qui sert à
 générer des nombres aléatoires.
-Le module "math" contient des fonctions en lien avec les opérations mathématiques autres
-que des simples opérations (+, -, *, /, %, etc.).
 """
+"""
+Le module "math" contient des fonctions en lien avec les opérations mathématiques autres
+que des simples opérations (+, -, *, /, %, etc.). Il contient aussi des constantes telles que PI.
+Si l'on ne veut pas importer tout ce que le module contient, il faut le spécifier avec la commande from.
+"""
+from math import pi
+
+print(f"PI = {pi}")
 
 
 # Les variables en python
@@ -32,18 +38,17 @@ ou pas.
 Voici la syntaxe de la fonction:
 input(prompt)
 Le paramètre 'prompt' doit être de type "string". C'est le message qui sera affiché
-avant de faire la saisie. Il est optionnel.
+avant de faire la saisie. Il est optionel.
 À noter que la fonction input retourne une valeur. Celle-ci est TOUJOURS de type string.
-Dans l'exemple ci-bas, la variable "reponse" va contenir ce que l'usager à tapé au clavier.
+Dans l'exemple ci-bas, la variable "nom_usager" va contenir ce que l'usager à tapé au clavier.
 """
 
 nom_usager = input("Quel est ton nom?")
-
 print("Quel est ton nom?")
 nom_usager2 = input()
 
 """
-La conversion de type. Python est un language dynamique et le type d'une variable
+La conversion de type. Python est un language dynamique et le type
 peut changer à chaque assignation.
 numero_dossier = 111 <- le type est int
 Si l'on fait l'assignation suivante:
@@ -117,7 +122,7 @@ else:
     print("Bonjour!")
 
 """
-Comment tester plus d'une condition à la fois? Il faut utiliser des opérateurs 
+Comment tester plus d'une condition à la fois dans le même if? Il faut utiliser des opérateurs 
 logiques.
 Si X And Y -> les deux doivent être True pour faire le branchement.
 Si X Or Y -> une des deux doit être True pour faire le branchement.
@@ -140,9 +145,7 @@ else:
 """
 Les boucles while.
 Elles permettent d'exécuter un bloc d'instruction tant et aussi longtemps que la
-condition est True. L'utilisation d'une boucle while est préférable lorsque l'on ne
-connaît pas le nombre de boucle que l'on veut faire. 
-On peut utiliser deux mots clés dans une boucle: break et continue.
+condition est True. On peut utiliser deux mots clés dans une boucle: break et continue.
 'break' permet de sortir immédiatement de la boucle et continuer l'exécution
 du code qui se trouve juste en bas de la boucle.
 'continue' permet de sauter le reste des instructions de la boucle et
@@ -160,13 +163,6 @@ while compteur < 100:  # compteur <= 100 c'est la condition évaluée
     if compteur == 99:
         break
 
-guessing = True
-while play_game:
-    while guessing:
-        # Logique du jeu
-        # if user_number == secret_number
-            #guessing = False
-        pass
 
 """
 Les boucles for! Cette boucle est à favoriser si vous savez d'avance
@@ -195,7 +191,7 @@ for i in range(0, 10, 2):
 """
 Les boucles for sont la meilleure façon de parcourir une chaîne de caractères ou une
 liste. C'est la meilleure façon puisque Python va connaître la grosseur de la liste ou de la chaîne
-de caractère par "magie" et il va stopper la boucle adéquatement.
+de caractères par "magie" et il va stopper la boucle automatique à la fin de la liste ou de la chaîne de caractères.
 La syntaxe sera alors :
     for x in liste:
 """
@@ -205,7 +201,7 @@ for membre in membres_groupe:
 
 nom_groupe = "Metallica"
 for ch in nom_groupe:
-    print(ch)
+    print(f"{ch}")
 
 """
 Les fonctions.
@@ -235,6 +231,7 @@ if is_player_alive(player_hp):
 else:
     print("Dead")
 
+
 def player_potion_use(potion_heal_amount):
     """
     Simple fonction qui permet au joueur de boire une potion de vie.
@@ -243,7 +240,8 @@ def player_potion_use(potion_heal_amount):
     """
     # Afin de modifier une variable globale dans une fonction, il est
     # important de faire la déclaration ci-bas avant
-    # la modification.
+    # la modification. Ceci permet à l'interpréteur de savoir que la variable "player_hp" a été déclaré
+    # au niveau global et non dans la fonction.
     global player_hp
     player_hp += potion_heal_amount
 
@@ -263,10 +261,15 @@ def die_roll(die_formula):
     :param die_formula: How many dice of x side to roll
     :return: the dice sum
     """
-    print(die_formula)
-    return random.randrange(1, 6)
+    import re
+
+    chiffres = re.split("d", die_formula.lower(), maxsplit=1)
+    total = 0
+    for nb in range(int(chiffres[0])):
+        total += random.randint(1, int(chiffres[1]))
+    return total
 
 
-force = die_roll("1d6")
-force2 = die_roll("2d6")
-force3 = die_roll("10d4")
+print(f"La force du joueur est de (1d6) = {die_roll("1d6")}")
+print(f"La force du joueur est de (2d6) = {die_roll("2d6")}")
+print(f"La force du joueur est de (10d4) = {die_roll("10d4")}")
